@@ -36,26 +36,29 @@ public class SurveyController {
 	@PostMapping("/survey")
 	public ResponseEntity<SurveyQuestion> saveSurvey(@RequestBody SurveyQuestion survey) {
 		SurveyQuestion s= surveyServiceImpl.saveSurvey(survey);
-		return new ResponseEntity<>(s,HttpStatus.CREATED);
+		return ResponseEntity.ok(s);
 		
 		
 	}
 	
 	@DeleteMapping("/survey/{id}")
-	public String deleteSurveyById(@PathVariable int id) {
+	public ResponseEntity<String> deleteSurveyById(@PathVariable int id) {
+		
 		surveyServiceImpl.deleteSurveyById(id);
-		return "Deleted successfully";
+		return ResponseEntity.ok("deleted Successfully");
+	
 	}
 	
 	@PutMapping("/survey/{id}")
-	public String updateSurvey(@PathVariable int id, @RequestBody SurveyQuestion survey) {
-		surveyServiceImpl.updateSurvey(survey, id);
-		return "Updated successfully";
+	public ResponseEntity<SurveyQuestion> updateSurvey(@PathVariable int id, @RequestBody SurveyQuestion survey) {
+		SurveyQuestion update= surveyServiceImpl.updateSurvey(survey, id);
+		return ResponseEntity.ok(update);
 	}
 	
 	@GetMapping("survey/{id}")
-	public SurveyQuestion retriveSurveyById(@PathVariable int id) {
-		return surveyServiceImpl.retriveSurveyById(id);
+	public ResponseEntity<SurveyQuestion> retriveSurveyById(@PathVariable int id) {
+		SurveyQuestion e1= surveyServiceImpl.retriveSurveyById(id);
+		return ResponseEntity.ok(e1);
 	}
 	
 

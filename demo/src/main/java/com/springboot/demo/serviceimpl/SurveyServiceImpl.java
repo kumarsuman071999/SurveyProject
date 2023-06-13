@@ -72,7 +72,10 @@ public class SurveyServiceImpl implements SurveyService {
 	@Override
 	public void deleteSurveyById(int id) {
 		// TODO Auto-generated method stub
-		surveyrepository.deleteById(id);
+		surveyrepository.findById(id).orElseThrow(()-> new ResourceNotFoundexception("survey with id does not exist:" + id) );
+		
+		
+		 surveyrepository.deleteById(id);
 		
 		
 	}
